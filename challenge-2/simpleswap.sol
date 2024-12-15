@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.6;
+pragma solidity ^0.8.26;
 
-// Interfaz estándar ERC20 para los tokens que usarás en el swap.
+// Standard ERC20 interface that you can use for internal token transfer
 interface IERC20 {
     function totalSupply() external view returns (uint256);
     function balanceOf(address account) external view returns (uint256);
@@ -11,7 +11,7 @@ interface IERC20 {
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
 }
 
-// Interfaz del contrato de Uniswap V3 para realizar el intercambio.
+// Uniswap V3 02 router interface with the function that you will need to use for this challenge
 interface ISwapRouter02 {
     struct ExactInputSingleParams {
         address tokenIn;
@@ -22,46 +22,26 @@ interface ISwapRouter02 {
         uint256 amountOutMinimum;
         uint160 sqrtPriceLimitX96;
     }
-
     function exactInputSingle(ExactInputSingleParams calldata params) external payable returns (uint256 amountOut);
 }
 
 contract UniV3Swap {
-    // Dirección del Router de Uniswap V3 en Sepolia
-    address private constant UNIV3_ROUTER = 0x4D73A4411CA1c660035e4AECC8270E5DdDEC8C17;
+    // Uniswap Router address deployed at Scroll Sepolia Testnet
+    address SCROLL_SEPOLIA_UNIV3_ROUTER_V2 = 0x17AFD0263D6909Ba1F9a8EAC697f76532365Fb95;
 
-    // Función para realizar el intercambio
-    function swap(
-        address tokenIn,
-        address tokenOut,
-        uint24 fee,
-        uint256 amountIn,
-        uint256 amountOutMinimum,
-        uint160 sqrtPriceLimitX96
-    ) external {
-        // Verificar que el contrato ha recibido la cantidad adecuada de tokens
-        uint256 balanceBefore = IERC20(tokenIn).balanceOf(address(this));
-        require(IERC20(tokenIn).transferFrom(msg.sender, address(this), amountIn), "Transfer failed");
-        uint256 balanceAfter = IERC20(tokenIn).balanceOf(address(this));
-        uint256 receivedAmount = balanceAfter - balanceBefore;
-
-        require(receivedAmount == amountIn, "Incorrect token amount received");
-
-        // Aprobar el router de Uniswap V3 para gastar los tokens
-        require(IERC20(tokenIn).approve(UNIV3_ROUTER, amountIn), "Approve failed");
-
-        // Definir los parámetros para el intercambio de Uniswap V3
-        ISwapRouter02.ExactInputSingleParams memory params = ISwapRouter02.ExactInputSingleParams({
-            tokenIn: tokenIn,
-            tokenOut: tokenOut,
-            fee: fee,
-            recipient: msg.sender,
-            amountIn: amountIn,
-            amountOutMinimum: amountOutMinimum,
-            sqrtPriceLimitX96: sqrtPriceLimitX96
-        });
-
-        // Realizar el intercambio
-        ISwapRouter02(UNIV3_ROUTER).exactInputSingle(params);
+    // Trade two tokens in the Uniswap V3 contract deployed at Scroll Sepolia Testnet. You can try it yourself by passing the following params:
+    // tokenIn: Contract address of the token you want to sell, for example WETH 0x5300000000000000000000000000000000000004
+    // tokenOut: Contract address of the token you want to buy, for example Aave's GHO Stablecoin 0xD9692f1748aFEe00FACE2da35242417dd05a8615
+    // fee: Fee that goes to the LP holders, try with 3000 which represents 0.30%
+    // amountIn: Amount of tokens you wan't to sell
+    // amountOutMinimum: Minimum amount of GHO you want in return
+    // sqrtPriceLimitX96: Price limit, used by advanced traders, you can set this to 0 for testing purposes
+    function swap(address tokenIn, address tokenOut, uint24 fee, uint256 amountIn, uint256 amountOutMinimum, uint160 sqrtPriceLimitX96)
+        external
+    {
+        // 1. Transfer the tokens the user is Selling, tokenIn
+        // 2. Allow or Approve the uniswap router from the tokenIn contract
+        // 3. Prepare the ExactInputSingleParams struct bu filling all the parameters
+        // 4. Execute the exactInputSingle function
     }
 }

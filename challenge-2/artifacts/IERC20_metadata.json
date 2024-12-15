@@ -167,11 +167,11 @@
 	},
 	"sources": {
 		"challenge-2/simpleswap.sol": {
-			"keccak256": "0x795269679566301b55549aa92bd61d60d15bb2526bcc9fc25d92e7b61743ed83",
+			"keccak256": "0x4faf6846828665db7a358b17203f88c08a1e9284de4a0fd10054966be42d8962",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a44ce9ead2609196f73c955dcd8a5e5ce120e74ef77d8f6374670db1fb2bc74f",
-				"dweb:/ipfs/QmQz43HQ96neuvCeGZJA91ErXV9agSXtNbTDgVqWU1hC89"
+				"bzz-raw://718e1de01ea39c8f54e9e8de6652037c98fee7af8633ee4a1714bcc1fab86310",
+				"dweb:/ipfs/QmVVP4LFuKckQNim5KPnARMCXGMeVyNmYUfhxrvy2z1Kea"
 			]
 		}
 	},
