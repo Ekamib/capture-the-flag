@@ -1,0 +1,45 @@
+{
+	"compiler": {
+		"version": "0.8.28+commit.7893614a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"challenge-4/AaveLender-Challenge.sol": "DataTypes"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"challenge-4/AaveLender-Challenge.sol": {
+			"keccak256": "0x772fa8221906cb00d9babde38d20998eb6f7e112de0cf67f0a10badd5863d6b1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://95ac210c56aa7487109f4599a2fcccdd17f1d45cc54b3cdc6ca8c03f492a441e",
+				"dweb:/ipfs/QmQ1e7Z3aZBg9LYzZDgo3kvZCMVwQfFUBymJVGMoXH8pfc"
+			]
+		}
+	},
+	"version": 1
+}
